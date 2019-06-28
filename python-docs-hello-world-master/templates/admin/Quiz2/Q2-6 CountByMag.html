@@ -1,0 +1,74 @@
+{% extends "admin/admin.html" %}
+{% block content %}
+    <section class="content-header">
+        <h1>Search By Magnitude </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> List</a></li>
+            <li class="active">List</li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="box">
+                <div class="box-header">
+                    {% for k in count %}
+                        <h3 class="box-title">There are {{ k[0] }} lists for {{ key1_mag }}<=mag<={{ key2_mag }}</h3>
+                    {% endfor %}
+                    <div class="input-group input-group-sm" style="width: 300px;">
+                        <div style="float: left">
+                            <input type="text" name="table_search" class="form-control" id="key1_mag"
+                                   placeholder="input mag1 value...">
+                            <input type="text" name="table_search" class="form-control" id="key2_mag"
+                                   placeholder="input mag2 value...">
+                            <input type="text" name="table_search" class="form-control" id="increment"
+                                   placeholder="input  increment value...">
+                        </div>
+                        <div style="float: right">
+                            <button id="do_search" type="submit" class="btn btn-default"><i
+                                    class="fa fa-search"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-ms-12">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">Earthquake List</h3>
+                        </div>
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tbody>
+                                {% for label in listlabel %}
+                                    <tr>
+                                        <th>{{ label }}-{{ label+ increment }}</th>
+                                    </tr>
+                                {% endfor %}
+                                {% for v in count1 %}
+                                    <tr>
+                                        <td>{{ v[0][0] }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $("#g-2").addClass("active")
+            $("#g-2-2").addClass("active")
+            $("#do_search").click(function () {
+                var key1_mag = $("#key1_mag").val();
+                var key2_mag = $("#key2_mag").val();
+                var key3_mag = $("#increment").val();
+                location.href = "{{ url_for ('count_mag')}}?mag1=" + key1_mag + "&mag2=" + key2_mag + "&increment=" + key3_mag;
+            });
+        })
+    </script>
+{% endblock %}

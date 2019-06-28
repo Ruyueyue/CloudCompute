@@ -1,0 +1,118 @@
+{% extends "admin/admin.html" %}
+{% block content %}
+    <section class="content-header">
+        <h1>Search By Magnitude </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> List</a></li>
+            <li class="active">List</li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">mag:{{ key1_mag }}-----{{ key2_mag }} </h3>
+                    <br/>
+                    <h3 class="box-title">time:{{ key1_time }}-----{{ key2_time }} </h3>
+                    <div class="input-group input-group-sm" style="width: 300px;">
+                        <div style="float: left">
+                            <input type="text" name="table_search" class="form-control" id="key1_mag"
+                                   placeholder="input mag1 value...">
+                            <input type="text" name="table_search" class="form-control" id="key2_mag"
+                                   placeholder="input mag2 value...">
+                            <input type="text" name="table_search" class="form-control" id="key1_time"
+                                   placeholder="input time1 value...">
+                            <input type="text" name="table_search" class="form-control" id="key2_time"
+                                   placeholder="input time2 value...">
+                        </div>
+                        <div style="float: right">
+                            <button id="do_search" type="submit" class="btn btn-default"><i
+                                    class="fa fa-search"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-ms-12">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">Earthquake List</h3>
+                        </div>
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tbody>
+                            <tr>
+                                <th>time</th>
+                                <th>latitude</th>
+                                <th>longitude</th>
+                                <th>depth</th>
+                                <th>mag</th>
+                                <th>magType</th>
+                                <th>nst</th>
+                                <th>gap</th>
+                                <th>dmin</th>
+                                <th>rms</th>
+                                <th>net</th>
+                                <th>id</th>
+                                <th>updated</th>
+                                <th>place</th>
+                                <th>type</th>
+                                <th>horizontalError</th>
+                                <th>depthError</th>
+                                <th>magError</th>
+                                <th>magNst</th>
+                                <th>status</th>
+                                <th>locationSource</th>
+                                <th>magSource</th>
+                            </tr>
+                                {% for v in data %}
+                                    <tr>
+                                        <td>{{ v[0] }}</td>
+                                        <td>{{ v[1] }}</td>
+                                        <td>{{ v[2] }}</td>
+                                        <td>{{ v[3] }}</td>
+                                        <td>{{ v[4] }}</td>
+                                        <td>{{ v[5] }}</td>
+                                        <td>{{ v[6] }}</td>
+                                        <td>{{ v[7] }}</td>
+                                        <td>{{ v[8] }}</td>
+                                        <td>{{ v[9] }}</td>
+                                        <td>{{ v[10] }}</td>
+                                        <td>{{ v[11] }}</td>
+                                        <td>{{ v[12] }}</td>
+                                        <td>{{ v[13] }}</td>
+                                        <td>{{ v[14] }}</td>
+                                        <td>{{ v[15] }}</td>
+                                        <td>{{ v[16] }}</td>
+                                        <td>{{ v[17] }}</td>
+                                        <td>{{ v[18] }}</td>
+                                        <td>{{ v[19] }}</td>
+                                        <td>{{ v[20] }}</td>
+                                        <td>{{ v[21] }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $("#g-3").addClass("active")
+            $("#g-3-3").addClass("active")
+            $("#do_search").click(function () {
+                var key1_mag = $("#key1_mag").val();
+                var key2_mag = $("#key2_mag").val();
+                var key1_time = $("#key1_time").val();
+                var key2_time = $("#key2_time").val();
+                location.href = "{{ url_for ('search_mag_time')}}?mag1=" + key1_mag + "&mag2=" + key2_mag + "&time1=" + key1_time + "&time2=" + key2_time;
+            });
+
+        })
+    </script>
+{% endblock %}

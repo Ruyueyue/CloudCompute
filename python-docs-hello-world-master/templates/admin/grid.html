@@ -1,0 +1,266 @@
+<ul class="sidebar-menu">
+    <li class="header">Menu</li>
+    <li class="treeview" id="g-1">
+        <a href="#">
+            <i class="fa fa-home" aria-hidden="true"></i>
+            <span>index</span>
+            <span class="label label-primary pull-right">1</span>
+        </a>
+        <ul class="treeview-menu">
+            <li id="g-1-1">
+                <a href="{{ url_for ('index') }}">
+                    <i class="fa fa-circle-o"></i> Hello!
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="treeview" id="g-3">
+        <a href="#">
+            <i class="fa fa-anchor" aria-hidden="true"></i>
+            <span>Assigement2</span>
+            <span class="label label-primary pull-right">3</span>
+        </a>
+        <ul class="treeview-menu">
+            <li id="g-3-1">
+                <a href="{{ url_for ('earthquake_list') }}">
+                    <i class="fa fa-circle-o"></i> AllList
+                </a>
+            </li>
+            <li id="g-3-2">
+                <a href="{{ url_for ('search_mag') }}">
+                    <i class="fa fa-circle-o"></i> 1-Bigger_Mag
+                </a>
+            </li>
+            <li id="g-3-3">
+                <a href="{{ url_for('search_mag_time') }}">
+                    <i class="fa fa-circle-o"></i> 2-Mag&&Time
+                </a>
+            </li>
+            <li id="g-3-4">
+                <a href="{{ url_for('search_distance_la_lo') }}">
+                    <i class="fa fa-circle-o"></i> 3-Distance
+                </a>
+            </li>
+            <li id="g-3-5">
+                <a href="{{ url_for('mag_night') }}">
+                    <i class="fa fa-circle-o"></i> 5-IsNight?
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="treeview" id="g-2">
+        <a href="#">
+            <i class="fa fa-archive" aria-hidden="true"></i>
+            <span>Quiz2</span>
+            <span class="label label-primary pull-right">2</span>
+        </a>
+        <ul class="treeview-menu">
+            <li id="g-2-1">
+                <a href="{{ url_for ('Search_min_mag') }}">
+                    <i class="fa fa-circle-o"></i> 5-MinMag
+                </a>
+            </li>
+            <li id="g-2-2">
+                <a href="{{ url_for('count_mag') }}">
+                    <i class="fa fa-circle-o"></i> 6-Count_Mag
+                </a>
+            </li>
+            <li id="g-2-3">
+                <a href="{{ url_for('find_cluster') }}">
+                    <i class="fa fa-circle-o"></i> 7-ClusterByLa&Lo
+                </a>
+            </li>
+            <li id="g-2-4">
+                <a href="{{ url_for('search_depth_time') }}">
+                    <i class="fa fa-circle-o"></i> 8-Depth&&Time
+                </a>
+            </li>
+            <li id="g-2-5">
+                <a href="{{ url_for('search_distance') }}">
+                    <i class="fa fa-circle-o"></i> 9-Distance
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="treeview" id="g-4">
+        <a href="#">
+            <i class="fa fa-anchor" aria-hidden="true"></i>
+            <span>Assigement3</span>
+            <span class="label label-primary pull-right">4</span>
+        </a>
+        <ul class="treeview-menu">
+            <li id="g-4-1">
+                <a href="{{ url_for ('random_search_mag') }}">
+                    <i class="fa fa-circle-o"></i> 1-RandomSearch
+                </a>
+            </li>
+            <li id="g-4-2">
+                <a href="{{ url_for ('range_page') }}">
+                    <i class="fa fa-circle-o"></i> 2-RangeSearch
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="treeview" id="g-6">
+        <a href="#">
+            <i class="fa fa-archive" aria-hidden="true"></i>
+            <span>Quiz3</span>
+            <span class="label label-primary pull-right">4</span>
+        </a>
+        <ul class="treeview-menu">
+            <li id="g-6-1">
+                <a href="{{ url_for ('list_la') }}">
+                    <i class="fa fa-circle-o"></i> 1-list
+                </a>
+            </li>
+            <li id="g-6-2">
+                <a href="{{ url_for ('random_search_sql') }}">
+                    <i class="fa fa-circle-o"></i> 2-random_sql
+                </a>
+            </li>
+            </li>
+            <li id="g-6-4">
+                <a href="{{ url_for ('sql_or_redis') }}">
+                    <i class="fa fa-circle-o"></i> 3-sql_or_redis
+                </a>
+            </li>
+            <li id="g-6-3">
+                <a href="{{ url_for ('random_search_redis') }}">
+                    <i class="fa fa-circle-o"></i> 4-random_redis
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="treeview" id="g-5">
+        <a href="#">
+            <i class="fa fa-anchor" aria-hidden="true"></i>
+            <span>Assigement4</span>
+            <span class="label label-primary pull-right">4</span>
+        </a>
+        <ul class="treeview-menu">
+            <li id="g-5-1">
+                <a href="{{ url_for ('histogram') }}">
+                    <i class="fa fa-circle-o"></i> 1-histogram-mag-count
+                </a>
+            </li>
+            <li id="g-5-2">
+                <a href="{{ url_for ('pie') }}">
+                    <i class="fa fa-circle-o"></i> 2-pie chart-Night
+                </a>
+            </li>
+            <li id="g-5-3">
+                <a href="{{ url_for ('line') }}">
+                    <i class="fa fa-circle-o"></i> 3-line
+                </a>
+            </li>
+            <li id="g-5-4">
+                <a href="{{ url_for ('scatter') }}">
+                    <i class="fa fa-circle-o"></i> 4-scatter
+                </a>
+            </li>
+            <li id="g-5-5">
+                <a href="{{ url_for ('count_time_line') }}">
+                    <i class="fa fa-circle-o"></i> 5-count day
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="treeview" id="g-7">
+        <a href="#">
+            <i class="fa fa-archive" aria-hidden="true"></i>
+            <span>Quiz4</span>
+            <span class="label label-primary pull-right">4</span>
+        </a>
+        <ul class="treeview-menu">
+            <li id="g-7-1">
+                <a href="{{ url_for ('quiz_list') }}">
+                    <i class="fa fa-circle-o"></i> 5-list
+                </a>
+            </li>
+            <li id="g-7-3">
+                <a href="{{ url_for ('quiz_scatter') }}">
+                    <i class="fa fa-circle-o"></i> 6-scatter
+                </a>
+            </li>
+            <li id="g-7-2">
+                <a href="{{ url_for ('quiz_pie') }}">
+                    <i class="fa fa-circle-o"></i> 7-pie
+                </a>
+            </li>
+            <li id="g-7-4">
+                <a href="{{ url_for ('count_line_quiz') }}">
+                    <i class="fa fa-circle-o"></i> 8-bar
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="treeview" id="g-8">
+        <a href="#">
+            <i class="fa fa-anchor" aria-hidden="true"></i>
+            <span>Assignment5</span>
+            <span class="label label-primary pull-right">4</span>
+        </a>
+        <ul class="treeview-menu">
+            <li id="g-8-1">
+                <a href="{{ url_for ('Assignment5_list') }}">
+                    <i class="fa fa-circle-o"></i> 5-list
+                </a>
+            </li>
+            <li id="g-8-2">
+                <a href="{{ url_for ('Assignment5_cluster') }}">
+                    <i class="fa fa-circle-o"></i> 6-cluster
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="treeview" id="g-9">
+        <a href="#">
+            <i class="fa fa-archive" aria-hidden="true"></i>
+            <span>Quiz5</span>
+            <span class="label label-primary pull-right">4</span>
+        </a>
+        <ul class="treeview-menu">
+            <li id="g-9-1">
+                <a href="{{ url_for ('Quiz5_cluster5') }}">
+                    <i class="fa fa-circle-o"></i> 5-list
+                </a>
+            </li>
+            <li id="g-9-2">
+                <a href="{{ url_for ('Quiz5_option') }}">
+                    <i class="fa fa-circle-o"></i> 6-option
+                </a>
+            </li>
+            <li id="g-9-3">
+                <a href="{{ url_for ('Quiz5_centroid') }}">
+                    <i class="fa fa-circle-o"></i> 7-centroid
+                </a>
+            </li>
+            <li id="g-9-4">
+                <a href="{{ url_for ('Quiz5_chart') }}">
+                    <i class="fa fa-circle-o"></i> 8-chart
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="treeview" id="g-10">
+        <a href="#">
+            <i class="fa fa-archive" aria-hidden="true"></i>
+            <span>Quiz6</span>
+            <span class="label label-primary pull-right">4</span>
+        </a>
+        <ul class="treeview-menu">
+            <li id="g-10-1">
+                <a href="{{ url_for ('show_picture') }}">
+                    <i class="fa fa-circle-o"></i> 6-picture
+                </a>
+            </li>
+        </ul>
+        <ul class="treeview-menu">
+            <li id="g-10-2">
+                <a href="{{ url_for ('bonus') }}">
+                    <i class="fa fa-circle-o"></i> 8
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>

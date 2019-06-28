@@ -1,0 +1,31 @@
+{% extends "admin/admin.html" %}
+{% block content %}
+    <section class="content-header">
+        <h1>Clould</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Index</a></li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h9 class="box-title">1001682447 Bian,Ruyue</h9>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block js %}
+    <script src="{{ url_for('static',filename='js/echarts.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $("#g-1").addClass("active")
+            $("#g-1-1").addClass("active")
+        })
+    </script>
+{% endblock %}

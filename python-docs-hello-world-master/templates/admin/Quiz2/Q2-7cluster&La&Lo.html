@@ -1,0 +1,89 @@
+{% extends "admin/admin.html" %}
+{% block content %}
+<section class="content-header">
+    <h1>Find Cluster </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> List</a></li>
+        <li class="active">List</li>
+    </ol>
+</section>
+<section class="content" id="showcontent">
+    <div class="row">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">There are {{ count }} lists between ({{ latitude1,longitude1 }}) and ({{ latitude2
+                    }},{{ longitude2 }})</h3>
+                <div class="input-group input-group-sm" style="width: 300px;">
+                    <div style="float: left">
+                        <input type="text" name="table_search" class="form-control" id="small_latitude"
+                               placeholder="input latitude1 value...">
+                        <input type="text" name="table_search" class="form-control" id="small_longitude"
+                               placeholder="input longitude1 value...">
+                        <input type="text" name="table_search" class="form-control" id="large_latitude"
+                               placeholder="input latitude2 value...">
+                        <input type="text" name="table_search" class="form-control" id="large_longitude"
+                               placeholder="input longitude2 value...">
+
+                    </div>
+                    <div style="float: right">
+                        <button id="do_search" type="submit" class="btn btn-default"><i
+                                class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-ms-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Earthquake List</h3>
+                    </div>
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>time</th>
+                                <th>latitude</th>
+                                <th>longitude</th>
+                                <th>depth</th>
+                                <th>mag</th>
+                                <th>rms</th>
+                                <th>place</th>
+                            </tr>
+                            {% for v in data %}
+                            <tr>
+                                <td>{{ v[0] }}</td>
+                                <td>{{ v[1] }}</td>
+                                <td>{{ v[2] }}</td>
+                                <td>{{ v[3] }}</td>
+                                <td>{{ v[4] }}</td>
+                                <td>{{ v[5] }}</td>
+                                <td>{{ v[6] }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script>
+    $(document).ready(function () {
+        $("#g-2").addClass("active")
+        $("#g-2-3").addClass("active")
+        $("#do_search").click(function () {
+            var small_latitude = $("#small_latitude").val();
+            var large_latitude = $("#large_latitude").val();
+            var small_longitude = $("#small_longitude").val();
+            var large_longitude = $("#large_longitude").val();
+            location.href = "{{ url_for ('find_cluster')}}?latitude1=" + small_latitude + "&latitude2=" + large_latitude + "&longitude1=" + small_longitude + "&longitude2=" + large_longitude;
+        });
+
+    })
+
+</script>
+{% endblock %}

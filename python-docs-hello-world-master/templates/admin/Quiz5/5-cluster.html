@@ -1,0 +1,74 @@
+{% extends "admin/admin.html" %}
+{% block content %}
+<section class="content-header">
+    <h1>Clould</h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Index</a></li>
+    </ol>
+</section>
+<section class="content" id="showcontent">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h9 class="box-title">1001682447 Bian,Ruyue</h9>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <!--{% for v in count %}-->
+                    <!--<td>There are {{ v[0] }} lists in the data set.</td>-->
+                    <!--{% endfor %}-->
+
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <h4>Wealth and Height:   {{cluster1time}}</h4>
+                    <br/>
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <th>label</th>
+                            <th>centers</th>
+                            <th>count</th>
+                        </tr>
+                        {% for v in cluster1 %}
+                        <tr>
+                            <td>{{ v[0] }}</td>
+                            <td>{{ v[1] }}</td>
+                            <td>{{ v[2] }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <br/>
+                    <h4>Fare and Age:   {{cluster2time}}</h4>
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <th>label</th>
+                            <th>centers</th>
+                            <th>count</th>
+                        </tr>
+                        {% for v in cluster2 %}
+                        <tr>
+                            <td>{{ v[0] }}</td>
+                            <td>{{ v[1] }}</td>
+                            <td>{{ v[2] }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('static',filename='js/echarts.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        $("#g-9").addClass("active")
+        $("#g-9-1").addClass("active")
+    })
+</script>
+{% endblock %}

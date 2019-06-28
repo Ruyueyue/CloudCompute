@@ -1,0 +1,69 @@
+{% extends "admin/admin.html" %}
+{% block content %}
+    <section class="content-header">
+        <h1>Clould</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Random Search</a></li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="box-header">
+                    <div class="input-group input-group-sm" style="width: 300px;">
+                        <div style="float: left">
+                            <input type="text" name="table_search" class="form-control" id="key1_mag"
+                                   placeholder="input mag1 value...">
+                            <input type="text" name="table_search" class="form-control" id="key2_mag"
+                                   placeholder="input mag2 value...">
+                        </div>
+                        <div style="float: right">
+                            <button id="do_search" type="submit" class="btn btn-default"><i
+                                    class="fa fa-search"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h9 class="box-title">Sqlite: {{ key1 }} <= mag <= {{ key2 }}</h9>
+                        <br/>
+                        <br/>
+                        {{ sqltime }}
+                        <td></td>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h9 class="box-title">Radis: {{ key1 }} <= mag <= {{ key2 }} </h9>
+                        <br/>
+                        <br/>
+                        {{ redistime }}
+                        <td></td>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block js %}
+    <script src="{{ url_for('static',filename='js/echarts.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $("#g-4").addClass("active")
+            $("#g-4-2").addClass("active")
+            $("#do_search").click(function () {
+                var key1_mag = $("#key1_mag").val();
+                var key2_mag = $("#key2_mag").val();
+                location.href = "{{ url_for ('range_page')}}?mag1=" + key1_mag + "&mag2=" + key2_mag;
+            });
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "admin/admin.html" %}
+{% block content %}
+<section class="content-header">
+    <h1>List </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> List</a></li>
+        <li class="active">List</li>
+    </ol>
+</section>
+<section class="content" id="showcontent">
+    <div class="row">
+        <div class="box">
+            <div class="box-header">
+                <h3>1001682447 Ruyue,Bian</h3>
+                <!--{% for k in count %}-->
+                <!--<h3 class="box-title">There are {{ k[0] }} lists for {{ key1_depthError }}<=depthError<={{ key2_depthError }} && longitude>{{longitude}}</h3>-->
+                <!--{% endfor %}-->
+                <!--<div class="input-group input-group-sm" style="width: 300px;">-->
+                    <!--<div style="float: left">-->
+                        <!--<input type="text" name="table_search" class="form-control" id="key1_depthError"-->
+                               <!--placeholder="input depthError1 value...">-->
+                        <!--<input type="text" name="table_search" class="form-control" id="key2_depyhError"-->
+                               <!--placeholder="input depthError2 value...">-->
+                        <!--<input type="text" name="table_search" class="form-control" id="longitude"-->
+                               <!--placeholder="input longitude value...">-->
+                    <!--</div>-->
+                    <!--<div style="float: right">-->
+                        <!--<button id="do_search" type="submit" class="btn btn-default"><i-->
+                                <!--class="fa fa-search"></i>-->
+                        <!--</button>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+            </div>
+            <div class="col-ms-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">People List</h3>
+                    </div>
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>2-8</th>
+                            </tr>
+                            {% for v in state1 %}
+                            <tr>
+                                <td>{{ v[0] }}</td>
+                            </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>8-40</th>
+                            </tr>
+                            {% for k in state2 %}
+                            <tr>
+                                <td>{{ k[0] }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script>
+    $(document).ready(function () {
+        $("#g-7").addClass("active")
+        $("#g-7-1").addClass("active")
+        $("#do_search").click(function () {
+            var key1 = $("#key1_depthError").val();
+            var key2 = $("#key2_depyhError").val();
+            var longitude = $("#longitude").val();
+            location.href = "{{ url_for ('quiz_list')}}?dep1=" + key1 + "&dep2=" + key2+"&long="+longitude;
+        });
+    })
+</script>
+{% endblock %}

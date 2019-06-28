@@ -1,0 +1,62 @@
+{% extends "admin/admin.html" %}
+{% block content %}
+<section class="content-header">
+    <h1>Clould</h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Index</a></li>
+    </ol>
+</section>
+<META HTTP-EQUIV="Refresh" content="1">
+<section class="content" id="showcontent">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h9 class="box-title">1001682447 Bian,Ruyue</h9>
+                    <h9 class="box-title">Cloud Computing 6:00</h9>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <td>
+                        <img src="{{ url_for('static',filename='pic/a.jpg') }}"
+                             style="width: 140px"
+                             class="img-responsive center-block" alt="">
+                    </td>
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <th>Lousiana</th>
+                            <th>Oklahoma</th>
+                            <th>Texas</th>
+                        </tr>
+                         {% for v in finaldata %}
+                        <tr>
+                            <td>{{v[0]}}</td>
+                            <td>{{v[1]}}</td>
+                            <td>{{v[2]}}</td>
+                        </tr>
+                        {%endfor%}
+                        </tbody>
+                    </table>
+                    <h9 class="box-title">request time: {{starttime}}</h9>
+                    <br/>
+                    <h9 class="box-title">response time: {{endtime}}</h9>
+                    <br/>
+                    <h9 class="box-title">elapsed time: {{time}}</h9>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('static',filename='js/echarts.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        $("#g-10").addClass("active")
+        $("#g-10-1").addClass("active")
+    })
+</script>
+
+{% endblock %}

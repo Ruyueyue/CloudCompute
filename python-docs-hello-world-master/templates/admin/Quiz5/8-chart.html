@@ -1,0 +1,83 @@
+{% extends "admin/admin.html" %}
+{% block content %}
+<section class="content-header">
+    <h1>Clould</h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Index</a></li>
+    </ol>
+</section>
+<section class="content" id="showcontent">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h9 class="box-title">1001682447 Bian,Ruyue</h9>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h3>Select feature</h3>
+                    <form action="{{ url_for('Quiz5_chart') }}" method="get">
+                        <input type="text" class="form-control" placeholder="cluster" name="n_cluster"><br>
+                        <tr>
+                            {% for feature in features%}
+                            <td><input type="checkbox" name="feature" value="{{ feature }}"/> {{ feature }}</td>
+                            {% endfor %}
+                        </tr>
+                        <input type="submit" value="Submit"/>
+                    </form>
+
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <h4>{{list}}</h4>
+                    <div class="box-body table-responsive no-padding center-block">
+                            <div id="chartmain" style="width:600px; height: 400px;"></div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('static',filename='js/echarts.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        $("#g-9").addClass("active")
+        $("#g-9-4").addClass("active")
+    })
+</script>
+<script type="text/javascript">
+        //指定图标的配置和数据
+        var option = {
+            title: {
+                text: 'Histogram'
+            },
+            tooltip: {},
+            legend: {
+                data: ['用户来源']
+            },
+            xAxis: {
+                data: {{ centers|tojson}}
+            },
+            yAxis: {},
+            series: [{
+                name: 'Data',
+                type: 'bar',
+                data: {{ quantity|tojson }},
+                itemStyle : {
+                    normal: {
+                        label : {show: true,position: 'top'},
+                        color: function (params){
+                            var colorList = ['#ff4844','#9ac3e5','#66ac52','#ffc032','#549bd3','#f47e39'];
+                            return colorList[params.dataIndex];
+                        }
+                    },},
+            }]
+        };
+        //初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chartmain'));
+
+        //使用制定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+{% endblock %}

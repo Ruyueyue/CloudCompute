@@ -1,0 +1,74 @@
+{% extends "admin/admin.html" %}
+{% block content %}
+    <!--内容-->
+    <section class="content-header">
+        <h1>Earthquake List</h1>
+        <ol class="breadcrumb">
+            <li class="active">Edit list</li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Edit List</h3>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="box-body">
+                            {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+                                <div class="alert alert-success alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                            aria-hidden="true"></button>
+                                    <h4><i class="icon fa fa-check"></i>success! </h4>
+                                    {{ msg }}
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <label for="input_name">{{ form.time.label }}</label>
+                                {{ form.time(value=earth[0]) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="input_name">{{ form.latitude.label }}</label>
+                                {{ form.latitude(value=earth[1]) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="input_name">{{ form.longitude.label }}</label>
+                                {{ form.longitude(value=earth[2]) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="input_name">{{ form.depth.label }}</label>
+                                {{ form.depth(value=earth[3]) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="input_name">{{ form.mag.label }}</label>
+                                {{ form.mag(value=earth[4]) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="input_name">{{ form.rms.label }}</label>
+                                {{ form.rms(value=earth[5]) }}
+                            </div>
+                        <div class="form-group">
+                                <label for="input_name">{{ form.place.label }}</label>
+                                {{ form.place(value=earth[6]) }}
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            {{ form.csrf_token }}
+                            {{ form.submit }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--内容-->
+{% endblock %}
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $("#g-4").addClass("active")
+            $("#g-4-1").addClass("active")
+        })
+    </script>
+{% endblock %}

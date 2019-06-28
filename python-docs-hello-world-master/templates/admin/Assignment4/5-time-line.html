@@ -1,0 +1,83 @@
+{% extends "admin/admin.html" %}
+{% block content %}
+    <section class="content-header">
+        <h1>Search By Magnitude </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> List</a></li>
+            <li class="active">List</li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="box">
+                <div class="box-header">
+                    <div class="input-group input-group-sm" style="width: 300px;">
+                        <div style="float: left">
+                            <input type="text" name="table_search" class="form-control" id="key1_time"
+                                   placeholder="input time1 value...">
+                            <input type="text" name="table_search" class="form-control" id="key2_time"
+                                   placeholder="input time2 value...">
+                        </div>
+                        <div style="float: right">
+                            <button id="do_search" type="submit" class="btn btn-default"><i
+                                    class="fa fa-search"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-ms-12">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                        </div>
+                        <div class="box-body table-responsive no-padding center-block">
+                            <div id="chartmain" style="width:600px; height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block js %}
+    <script src="{{ url_for('static',filename='js/echarts.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $("#g-5").addClass("active")
+            $("#g-5-5").addClass("active")
+            $("#do_search").click(function () {
+                var key1_time = $("#key1_time").val();
+                var key2_time = $("#key2_time").val();
+                location.href = "{{ url_for ('count_time_line')}}?time1=" + key1_time + "&time2=" + key2_time;
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        //指定图标的配置和数据
+        var option = {
+            title: {
+                text: 'Line'
+            },
+            tooltip: {},
+            legend: {
+                data: ['用户来源']
+            },
+            xAxis: {
+                data: {{ label|tojson}}
+            },
+            yAxis: {},
+            series: [{
+                name: '访问量',
+                type: 'line',
+                data: {{ count1|tojson }},
+                itemStyle : { normal: {label : {show: true,position: 'top'}}}
+            }]
+        };
+        //初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chartmain'));
+
+        //使用制定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+{% endblock %}
