@@ -2,7 +2,7 @@ import random
 import sqlite3
 from math import radians, sin, cos, asin, sqrt
 import redis
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for,session
 import numpy as np
 from sklearn.cluster import KMeans
 import pandas as pd
@@ -79,8 +79,14 @@ def count_mag():
         count1 = count.fetchall()
         count2.append(count1)
     print(count2)
+    data=[]
+    for i in range(len(count2)):
+        _data=[]
+        _data.append(listlabel[i])
+        _data.append(count2[i])
+        data.append(_data)
     return render_template("admin/Quiz2/Q2-6 CountByMag.html", key1_mag=key1_mag, key2_mag=key2_mag, count1=count2,
-                           listlabel=listlabel, increment=float(increment))
+                           listlabel=listlabel, increment=float(increment),data=data)
 
 
 # quiz2-7:cluster by latitude and longitude
@@ -165,7 +171,7 @@ def search_distance():
 
 
 # Assignment2
-# 查询所有数据
+# Assignment2- Search All data
 @application.route("/allmonth/list/", methods=["GET"])
 def earthquake_list():
     earthquakeDB = sqlite3.connect(DATABASE)
@@ -173,7 +179,7 @@ def earthquake_list():
     return render_template("admin/Assignment2/earthquake_list.html", data=data)
 
 
-# 1-查询大于某个值的数据
+# Assignment2-1-查询大于某个值的数据
 @application.route("/allmonth/search/mag/", methods=["GET"])
 def search_mag():
     key = request.args.get("key", "8")
@@ -936,22 +942,84 @@ def show_picture():
         endtime = sqlite3.datetime.datetime.now()
         time = endtime - starttime
         print(forfinal)
+
         earthquakeDB.execute("INSERT INTO jmeter (starttime,endtime,elapsedtime) VALUES (?,?,?)",
                              (str(starttime), str(endtime), str(time)))
         earthquakeDB.commit()
         return render_template("admin/Quiz6/Q6-6pic.html", starttime=starttime, endtime=endtime, time=time,
                                finaldata=forfinal)
 
-    # earthquakeDB.execute("INSERT INTO jmeter (starttime,endtime,elapsedtime) VALUES (?,?,?)",
-    #                      (str(starttime), str(endtime), str(time)))
-    # earthquakeDB.commit()
-    # return render_template("admin/Quiz6/Q6-6pic.html",starttime=starttime,endtime=endtime,time=time,finaldata=ffinaldata,year=year,num=str(100000000000000000000000000))
 @application.route("/Quiz6/8-pic",methods=["GET","POST"])
 def bonus():
     earthquakeDB = sqlite3.connect(DATABASE)
     data=earthquakeDB.execute("select * from jmeter")
     return render_template("/admin/Quiz6/Q6-8 bon.html",data=data)
-#port = int(os.getenv('PORT', 5000))
+
+#Quiz7
+@application.route("/Quiz7/5-studentview",methods=["GET","POST"])
+def studentView():
+    id = request.args.get('id')
+    session["id"] = id
+    conn = sqlite3.connect('myDb.db')
+    if id!=None:
+        c = conn.cursor()
+        c.execute(
+            "select * from quiz7courstu left join quiz7fall where quiz7courstu.Course=quiz7fall.Course and quiz7courstu.Section=quiz7fall.Section and IdNum='" + id+"'")
+        rows = c.fetchall()
+        c.execute("select * from quiz7fall")
+        rows2=c.fetchall()
+        return render_template("admin/Quiz7/Q7-5 studentview.html", rows=rows,id=id,rows2=rows2)
+    return render_template("admin/Quiz7/Q7-5 studentview.html")
+
+@application.route("/Quiz7/5-studentview/roll/<int:course><int:section>/", methods=["GET"])
+def student_roll(course=None,section=None):
+    id=session["id"]
+    print(course)
+    print(id)
+    print(section)
+    earthquakeDB = sqlite3.connect(DATABASE)
+    count=earthquakeDB.execute("select count(*) from quiz7courstu where IdNum="+str(id))
+    count=count.fetchall()
+    count=count[0][0]
+    if count<3:
+        key=True
+        data=earthquakeDB.execute("select Course,Section from quiz7courstu where IdNum="+id)
+        data=data.fetchall()
+        print(data)
+        for curdata in data:
+            print(curdata)
+            if curdata[0]==course and curdata[1]==section:
+                key=False
+        print(key)
+        if key:
+            earthquakeDB.execute("insert  OR IGNORE into quiz7courstu values (?,?,?)",
+                                 (str(course), str(id), str(section)))
+            earthquakeDB.commit()
+            flag = None
+    else:
+        flag="You can not roll in the course!"
+    return redirect(url_for('studentView',id=id))
+
+@application.route("/Quiz7/6-adview/", methods=["GET"])
+def Admin_view():
+    course=request.args.get("course")
+    section=request.args.get("section")
+    if course!=None:
+        earthquakeDB = sqlite3.connect(DATABASE)
+        data=earthquakeDB.execute("select * from quiz7courstu left join quiz7stu where quiz7courstu.IdNum=quiz7stu.IdNum and Course='" + course+"' and Section= '"+section+"'" )
+        data=data.fetchall()
+        print(data)
+        return render_template("admin/Quiz7/Q7-6 Adminview.html",data=data)
+    return render_template("admin/Quiz7/Q7-6 Adminview.html")
+
+global count
+count=0
+@application.route('/Quiz7/7-view/', methods=['GET'])
+def ques8():
+    time=sqlite3.datetime.datetime.now()
+    global count
+    count+=1
+    return render_template("admin/Quiz7/Q7-7.html", time=time,count=count)
 
 
 if __name__ == "__main__":

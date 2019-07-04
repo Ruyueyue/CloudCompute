@@ -1,0 +1,81 @@
+{% extends "admin/admin.html" %}
+{% block content %}
+    <section class="content-header">
+        <h1>Student View </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> List</a></li>
+            <li class="active">List</li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="box">
+                <div class="box-header">
+                    <div class="input-group input-group-sm" style="width: 300px;">
+                        <div style="float: left">
+                            <input type="text" name="table_search" class="form-control" id="course"
+                                   placeholder="input course">
+                        </div>
+                        <div style="float: left">
+                            <input type="text" name="table_search" class="form-control" id="section"
+                                   placeholder="input section">
+                        </div>
+                        <div style="float: right">
+                            <button id="do_search" type="submit" class="btn btn-default"><i
+                                    class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                    </div>
+
+                    <div class="col-ms-12">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <h3 class="box-title">Course List</h3>
+                            </div>
+                            <div class="box-body table-responsive no-padding">
+                                <table class="table table-hover">
+                                    <tbody>
+                                    <tr>
+                                        <th>IdNum</th>
+                                        <th>Fname</th>
+                                        <th>Lname</th>
+                                        <th>Age</th>
+                                        <th>Credit</th>
+                                    </tr>
+                                    {% for v in data %}
+                                        <tr>
+                                            <td>{{ v[0] }}</td>
+                                            <td>{{ v[1] }}</td>
+                                            <td>{{ v[2] }}</td>
+                                            <td>{{ v[3] }}</td>
+                                            <td>{{ v[4] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $("#g-11").addClass("active")
+            $("#g-11-2").addClass("active")
+            $("#do_search").click(function () {
+                var course = $("#course").val();
+                var section = $("#section").val();
+                location.href = "{{ url_for ('Admin_view')}}?course=" + course+"&section="+section;
+            });
+        })
+    </script>
+{% endblock %}
